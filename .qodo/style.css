@@ -1080,3 +1080,358 @@ body {
     margin-right: 15px;
     font-size: 1.3rem;
 }
+
+/* ==================== ABOUT US SECTION STYLES ==================== */
+.about-us-section {
+    margin: 60px 0;
+    padding: 0 20px;
+}
+
+/* Header de Sobre Nosotros */
+.about-header {
+    margin-bottom: 80px;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.about-header-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-header-text h2 {
+    color: var(--text-primary);
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.about-header-text h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.about-intro {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+.about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-color);
+}
+
+.highlight-item i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-right: 15px;
+    width: 25px;
+}
+
+.highlight-item span {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Imagen del header */
+.about-header-image {
+    display: flex;
+    justify-content: center;
+}
+
+.lab-hero-image {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+}
+
+.lab-image-main {
+    margin-bottom: 30px;
+}
+
+.lab-image-main i {
+    font-size: 5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.lab-image-main h4 {
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.lab-image-main p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.lab-credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-light);
+}
+
+.credential {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.credential i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.credential span {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Responsive para header */
+@media (max-width: 768px) {
+    .about-header {
+        padding: 40px 20px;
+        margin-bottom: 50px;
+    }
+
+    .about-header-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-header-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .about-header-text h3 {
+        font-size: 1.3rem;
+    }
+
+    .about-intro {
+        font-size: 1.1rem;
+    }
+
+    .lab-hero-image {
+        max-width: 100%;
+        padding: 30px;
+    }
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.about-text h2 {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 15px;
+}
+
+.about-description h3 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin: 30px 0 20px 0;
+}
+
+.about-description h4 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin: 25px 0 15px 0;
+}
+
+.about-description p {
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.methodology-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.methodology-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 1.1rem;
+}
+
+.methodology-list li:last-child {
+    border-bottom: none;
+}
+
+.methodology-list strong {
+    color: var(--accent-color);
+    display: inline-block;
+    width: 180px;
+    margin-right: 15px;
+}
+
+.lab-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    padding: 30px;
+    background: var(--bg-light);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.about-image {
+    position: sticky;
+    top: 100px;
+}
+
+.lab-image-container {
+    background: var(--bg-light);
+    border-radius: 15px;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.lab-image-placeholder {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lab-image-placeholder i {
+    font-size: 4rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.lab-image-placeholder h4 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.lab-image-placeholder p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.lab-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lab-feature {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+}
+
+.lab-feature:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.lab-feature i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-right: 15px;
+    width: 25px;
+}
+
+.lab-feature span {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Responsive para about-us-section */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-image {
+        position: static;
+    }
+
+    .lab-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}
