@@ -39,6 +39,38 @@ function showPage(pageId) {
     executePageScript(pageId);
 }
 
+function showProductDetail(productId) {
+    // Ocultar todas las páginas
+    const pages = document.querySelectorAll('.page-section');
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // Mostrar la página de detalle del producto
+    const productPage = document.getElementById(productId);
+    if (productPage) {
+        productPage.classList.add('active');
+    }
+
+    // Actualizar navbar - quitar todos los activos
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Cerrar menú móvil si está abierto
+    closeMobileMenu();
+
+    // Scroll to top suave
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+    // Inicializar página de detalle
+    initProductDetailPage(productId);
+}
+
 function executePageScript(pageId) {
     switch(pageId) {
         case 'home':
@@ -54,6 +86,44 @@ function executePageScript(pageId) {
             initContactoPage();
             break;
     }
+}
+
+// ==================== PRODUCT DETAIL PAGE SCRIPTS ====================
+function initProductDetailPage(productId) {
+    console.log(`Página de detalle cargada: ${productId}`);
+    
+    // Animación de entrada para el contenido
+    const detailContent = document.querySelector(`#${productId} .product-detail-content`);
+    if (detailContent) {
+        detailContent.style.opacity = '0';
+        detailContent.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            detailContent.style.opacity = '1';
+            detailContent.style.transform = 'translateY(0)';
+            detailContent.style.transition = 'all 0.5s ease';
+        }, 100);
+    }
+
+    // Configurar galería de imágenes
+    setupProductGallery(productId);
+}
+
+function setupProductGallery(productId) {
+    const galleryThumbs = document.querySelectorAll(`#${productId} .gallery-thumb`);
+    const mainImage = document.querySelector(`#${productId} .product-image-placeholder`);
+
+    galleryThumbs.forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            // Remover clase activa de todos los thumbnails
+            galleryThumbs.forEach(t => t.classList.remove('active'));
+            
+            // Agregar clase activa al thumbnail clickeado
+            this.classList.add('active');
+            
+            // Aquí podrías cambiar la imagen principal si tuvieras imágenes reales
+            console.log('Thumbnail clickeado:', this.querySelector('i').className);
+        });
+    });
 }
 
 // ==================== MOBILE MENU ====================
