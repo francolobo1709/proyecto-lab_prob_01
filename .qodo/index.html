@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Empresa - Inicio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <i class="fas fa-rocket"></i>
+                Mi Empresa
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showPage('home')" data-page="home">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('productos')" data-page="productos">
+                        <i class="fas fa-box"></i> Productos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('nosotros')" data-page="nosotros">
+                        <i class="fas fa-users"></i> Nosotros
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showPage('contacto')" data-page="contacto">
+                        <i class="fas fa-envelope"></i> Contacto
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Bienvenido a Mi Empresa</h1>
+                    <p>Soluciones innovadoras para tu negocio. Conectamos contigo a través de WhatsApp para brindarte la mejor atención.</p>
+                    <a href="#" class="cta-button" onclick="showPage('productos')">
+                        <i class="fas fa-box"></i> Ver Productos
+                    </a>
+                    <a href="#" class="cta-button" onclick="showPage('contacto')">
+                        <i class="fab fa-whatsapp"></i> Contactar
+                    </a>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="container">
+                    <h2 class="section-title">¿Por qué elegirnos?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Innovación</h3>
+                            <p>Utilizamos la última tecnología para ofrecerte soluciones modernas y efectivas.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fab fa-whatsapp"></i>
+                            <h3>Comunicación Directa</h3>
+                            <p>Te contactamos por WhatsApp para una comunicación rápida y personalizada.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Confiabilidad</h3>
+                            <p>Más de 5 años de experiencia respaldando a nuestros clientes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTOS PAGE -->
+        <section id="productos" class="page-section">
+            <div class="productos-header">
+                <div class="container">
+                    <h1>Nuestros Productos</h1>
+                    <p>Descubre nuestra amplia gama de productos y servicios</p>
+                </div>
+            </div>
+
+            <div class="productos-grid" id="productosGrid">
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>Laptop Pro Business</h3>
+                        <div class="producto-price">$45.999</div>
+                        <p>Laptop profesional con Intel Core i7, 16GB RAM, 512GB SSD. Ideal para trabajo empresarial exigente.</p>
+                        <button class="cta-button" onclick="consultarProducto('Laptop Pro Business', '$45.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>Smartphone Ultra</h3>
+                        <div class="producto-price">$28.999</div>
+                        <p>Smartphone con cámara de 108MP, pantalla AMOLED 120Hz, 8GB RAM. Fotografía y rendimiento premium.</p>
+                        <button class="cta-button" onclick="consultarProducto('Smartphone Ultra', '$28.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>Tablet Design Pro</h3>
+                        <div class="producto-price">$18.999</div>
+                        <p>Tablet 12.9" con Apple Pencil incluido, ideal para diseñadores y creativos. Pantalla Liquid Retina XDR.</p>
+                        <button class="cta-button" onclick="consultarProducto('Tablet Design Pro', '$18.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>Auriculares Premium</h3>
+                        <div class="producto-price">$8.999</div>
+                        <p>Auriculares con cancelación de ruido adaptativa, 30 horas de batería. Audio de alta fidelidad.</p>
+                        <button class="cta-button" onclick="consultarProducto('Auriculares Premium', '$8.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-watch"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>Smartwatch Fitness</h3>
+                        <div class="producto-price">$12.999</div>
+                        <p>Smartwatch con GPS, monitor de salud 24/7, resistente al agua. Tu compañero de entrenamiento.</p>
+                        <button class="cta-button" onclick="consultarProducto('Smartwatch Fitness', '$12.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="producto-card">
+                    <div class="producto-image">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="producto-content">
+                        <h3>PC Gaming Ultimate</h3>
+                        <div class="producto-price">$89.999</div>
+                        <p>PC gaming con RTX 4080, Ryzen 9, 32GB RAM, 1TB SSD. Rendimiento extremo para gaming y diseño.</p>
+                        <button class="cta-button" onclick="consultarProducto('PC Gaming Ultimate', '$89.999')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOSOTROS PAGE -->
+        <section id="nosotros" class="page-section">
+            <div class="nosotros-hero">
+                <div class="container">
+                    <h1>Sobre Nosotros</h1>
+                    <p>Conoce nuestra historia y valores</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <h3>Expansión Digital</h3>
+                        <p>Implementamos nuevas tecnologías y sistemas de comunicación directa con WhatsApp para mejorar la experiencia del cliente.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <h3>Crecimiento Sostenido</h3>
+                        <p>Ampliamos nuestro equipo y cartera de servicios, consolidándonos como referentes en el mercado.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <h3>Fundación</h3>
+                        <p>Iniciamos nuestro camino con la visión de brindar soluciones innovadoras y un servicio de excelencia.</p>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h2 class="section-title">Nuestros Valores</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-heart"></i>
+                            <h3>Compromiso</h3>
+                            <p>Estamos comprometidos con el éxito de nuestros clientes y la calidad de nuestros servicios.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Excelencia</h3>
+                            <p>Buscamos la excelencia en cada proyecto, superando las expectativas de nuestros clientes.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Confianza</h3>
+                            <p>Construimos relaciones duraderas basadas en la transparencia y la confianza mutua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO PAGE -->
+        <section id="contacto" class="page-section">
+            <div class="contact-page">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-header-content">
+                            <div class="whatsapp-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h1>¿Cómo podemos ayudarte?</h1>
+                            <p>Envíanos tu consulta y te responderemos por WhatsApp</p>
+                        </div>
+                    </div>
+
+                    <div class="form-container">
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> ¡Mensaje enviado correctamente! Te contactaremos pronto por WhatsApp.
+                        </div>
+
+                        <div class="error-message" id="errorMessage">
+                            <i class="fas fa-exclamation-triangle"></i> Por favor, completa todos los campos obligatorios.
+                        </div>
+
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nombre completo *</label>
+                                <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre completo">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Teléfono/WhatsApp *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+54 9 11 1234-5678">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="tu@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tipo de consulta *</label>
+                                <div class="category-grid">
+                                    <div class="category-option" onclick="selectCategory('general')">
+                                        <input type="radio" id="general" name="category" value="general" required>
+                                        <i class="fas fa-comments"></i>
+                                        <label for="general">Consulta General</label>
+                                    </div>
+                                    <div class="category-option" onclick="selectCategory('soporte')">
+                                        <input type="radio" id="soporte" name="category" value="soporte" required>
+                                        <i class="fas fa-tools"></i>
+                                        <label for="soporte">Soporte Técnico</label>
+                                    </div>
+                                    <div class="category-option" onclick="selectCategory('ventas')">
+                                        <input type="radio" id="ventas" name="category" value="ventas" required>
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <label for="ventas">Ventas</label>
+                                    </div>
+                                    <div class="category-option" onclick="selectCategory('reclamo')">
+                                        <input type="radio" id="reclamo" name="category" value="reclamo" required>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <label for="reclamo">Reclamo</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Mensaje *</label>
+                                <textarea id="message" name="message" required placeholder="Describe tu consulta detalladamente..."></textarea>
+                            </div>
+
+                            <button type="submit" class="send-button">
+                                <i class="fab fa-whatsapp"></i>
+                                Enviar por WhatsApp
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Horario de atención</strong><br>
+                                    Lun a Vie: 9:00 - 18:00
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-reply"></i>
+                                <div>
+                                    <strong>Tiempo de respuesta</strong><br>
+                                    Máximo 2 horas hábiles
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <strong>Datos seguros</strong><br>
+                                    Tu información está protegida
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <div class="floating-whatsapp" onclick="openDirectWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
