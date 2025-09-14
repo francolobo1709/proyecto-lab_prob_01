@@ -549,6 +549,72 @@ document.addEventListener('DOMContentLoaded', () => {
     window.refreshPageImages = refreshPageImages;
 });
 
+// ==================== MOBILE NAVIGATION ====================
+function toggleMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu) {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Prevenir scroll del body cuando el menú está abierto
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+}
+
+function closeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Cerrar menú móvil al hacer clic en un enlace
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeMobileMenu();
+        });
+    });
+    
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.querySelector('.navbar');
+        
+        if (navMenu && navMenu.classList.contains('active')) {
+            if (!navbar.contains(event.target)) {
+                closeMobileMenu();
+            }
+        }
+    });
+    
+    // Cerrar menú al cambiar orientación
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            closeMobileMenu();
+        }, 200);
+    });
+    
+    // Cerrar menú al redimensionar ventana
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+});
+
 // Animación suave al cargar la página
 window.addEventListener('load', function() {
     document.body.style.opacity = '0';
