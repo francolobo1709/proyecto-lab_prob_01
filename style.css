@@ -1711,206 +1711,123 @@ body {
     transform: scale(1.02);
 }
 
-/* ==================== RESPONSIVE DESIGN - NAVBAR ==================== */
+/* ==================== ESTILOS PARA IMÁGENES DE LABORATORIO ==================== */
 
-/* Tablet Portrait y Mobile Landscape (1024px y menor) */
-@media screen and (max-width: 1024px) {
-    .nav-container {
-        padding: 0 15px;
-    }
-    
-    .nav-menu {
-        gap: 20px;
-    }
-    
-    .nav-link {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
-    
-    .logo {
-        font-size: 1.3rem;
-    }
-    
-    .logo i {
-        font-size: 1.5rem;
-    }
+/* Contenedor principal de imagen de laboratorio */
+.lab-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Mobile Portrait y Tablet Portrait (768px y menor) */
+/* Imagen principal del laboratorio */
+.lab-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    border-radius: 15px;
+}
+
+.lab-main-image.loaded {
+    opacity: 1 !important;
+}
+
+.lab-main-image:hover {
+    transform: scale(1.05);
+}
+
+/* Fallback del laboratorio (cuando no hay imagen) */
+.lab-image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--bg-primary);
+    transition: opacity 0.3s ease;
+}
+
+.lab-image-fallback i {
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+/* Ocultar fallback cuando la imagen se carga */
+.lab-main-image.loaded + .lab-image-fallback {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Estados de carga específicos para laboratorio */
+.lab-image-container .image-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+}
+
+.lab-image-container .image-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(244, 67, 54, 0.1);
+    color: var(--accent-color);
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent-color);
+    z-index: 10;
+}
+
+/* Responsive para imágenes de laboratorio */
 @media screen and (max-width: 768px) {
-    .navbar {
-        height: 60px;
+    .lab-image-container {
+        height: 150px;
     }
     
-    .nav-container {
-        height: 60px;
-        padding: 0 15px;
+    .lab-image-fallback i {
+        font-size: 3rem;
     }
     
-    .hamburger {
-        display: flex;
-        z-index: 1001;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 60px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 60px);
-        background: var(--bg-primary);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 50px;
-        gap: 0;
-        transition: left 0.3s ease;
-        box-shadow: var(--shadow-lg);
-        border-top: 1px solid var(--border-color);
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-item {
-        width: 90%;
-        max-width: 300px;
-        margin-bottom: 10px;
-    }
-    
-    .nav-link {
-        width: 100%;
-        justify-content: center;
-        padding: 18px 20px;
-        font-size: 1.1rem;
-        border-radius: var(--radius-lg);
-        margin-bottom: 5px;
-    }
-    
-    .nav-link i {
-        font-size: 1.2rem;
-        margin-right: 8px;
-    }
-    
-    .logo {
-        font-size: 1.2rem;
-    }
-    
-    .logo i {
-        font-size: 1.4rem;
-    }
-    
-    .main-content {
-        margin-top: 60px;
-        min-height: calc(100vh - 60px);
+    .lab-image-container .image-loading,
+    .lab-image-container .image-error {
+        padding: 10px 15px;
+        font-size: 0.8rem;
     }
 }
 
-/* iPhone XR, iPhone 11, similares (414px breakpoint específico) */
-@media screen and (max-width: 414px) {
-    .nav-container {
-        padding: 0 12px;
+@media screen and (max-width: 480px) {
+    .lab-image-container {
+        height: 120px;
+        border-radius: 10px;
     }
     
-    .logo {
-        font-size: 1.1rem;
-        gap: 6px;
+    .lab-main-image {
+        border-radius: 10px;
     }
     
-    .logo i {
-        font-size: 1.3rem;
-    }
-    
-    .hamburger {
-        padding: 8px;
-    }
-    
-    .hamburger span {
-        width: 22px;
-        height: 2.5px;
-    }
-    
-    .nav-menu {
-        padding-top: 30px;
-    }
-    
-    .nav-item {
-        width: 95%;
-    }
-    
-    .nav-link {
-        padding: 16px 15px;
-        font-size: 1rem;
-    }
-    
-    .nav-link i {
-        font-size: 1.1rem;
-    }
-}
-
-/* iPhone SE, iPhone 5/5s y dispositivos muy pequeños (375px y menor) */
-@media screen and (max-width: 375px) {
-    .navbar {
-        height: 55px;
-    }
-    
-    .nav-container {
-        height: 55px;
-        padding: 0 10px;
-    }
-    
-    .logo {
-        font-size: 1rem;
-        gap: 5px;
-    }
-    
-    .logo i {
-        font-size: 1.2rem;
-    }
-    
-    .hamburger {
-        padding: 6px;
-    }
-    
-    .hamburger span {
-        width: 20px;
-        height: 2px;
-        margin: 2.5px 0;
-    }
-    
-    .nav-menu {
-        top: 55px;
-        height: calc(100vh - 55px);
-        padding-top: 25px;
-    }
-    
-    .nav-link {
-        padding: 14px 12px;
-        font-size: 0.95rem;
-    }
-    
-    .main-content {
-        margin-top: 55px;
-        min-height: calc(100vh - 55px);
-    }
-}
-
-/* Landscape mode para móviles */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    .nav-menu {
-        height: calc(100vh - 50px);
-        padding-top: 20px;
-        overflow-y: auto;
-    }
-    
-    .nav-link {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-    
-    .nav-item {
-        margin-bottom: 5px;
+    .lab-image-fallback i {
+        font-size: 2.5rem;
     }
 }
