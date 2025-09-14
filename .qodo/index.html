@@ -2,7 +2,25 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="v        <!-- PRODUCTOS PAGE -->
+        <section id="productos" class="page-section">
+            <div class="hero-section">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Nuestros Productos</h1>
+                        <p>Descubre nuestra amplia gama de productos analizados y certificados por nuestro laboratorio</p>
+                        <div class="hero-actions">
+                            <a href="#" class="cta-button" onclick="showPage('contacto')">
+                                <i class="fas fa-envelope"></i>
+                                Consultar Análisis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <h2 class="section-title">Productos Analizados</h2> content="width=device-width, initial-scale=1.0">
     <title>Mi Empresa - Inicio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
@@ -50,36 +68,40 @@
         <!-- HOME PAGE -->
         <section id="home" class="page-section active">
             <div class="hero-section">
-                <div class="hero-content">
-                    <h1>Bienvenido a Mi Empresa</h1>
-                    <p>Soluciones innovadoras para tu negocio. Conectamos contigo a través de WhatsApp para brindarte la mejor atención.</p>
-                    <a href="#" class="cta-button" onclick="showPage('productos')">
-                        <i class="fas fa-box"></i> Ver Productos
-                    </a>
-                    <a href="#" class="cta-button" onclick="showPage('contacto')">
-                        <i class="fab fa-whatsapp"></i> Contactar
-                    </a>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Laboratorio de Análisis Técnico</h1>
+                        <p>Especialistas en evaluación, certificación y análisis de productos tecnológicos. Metodologías rigurosas y equipamiento de última generación.</p>
+                        <div class="hero-actions">
+                            <a href="#" class="cta-button" onclick="showPage('productos')">
+                                <i class="fas fa-microscope"></i> Ver Análisis
+                            </a>
+                            <a href="#" class="cta-button" onclick="showPage('contacto')">
+                                <i class="fas fa-envelope"></i> Consultar
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="features-section">
                 <div class="container">
-                    <h2 class="section-title">¿Por qué elegirnos?</h2>
+                    <h2 class="section-title">¿Por qué confiar en nuestro laboratorio?</h2>
                     <div class="features-grid">
                         <div class="feature-card">
-                            <i class="fas fa-rocket"></i>
-                            <h3>Innovación</h3>
-                            <p>Utilizamos la última tecnología para ofrecerte soluciones modernas y efectivas.</p>
+                            <i class="fas fa-microscope"></i>
+                            <h3>Precisión Técnica</h3>
+                            <p>Utilizamos equipamiento de última generación y metodologías certificadas para análisis de máxima precisión.</p>
                         </div>
                         <div class="feature-card">
-                            <i class="fab fa-whatsapp"></i>
-                            <h3>Comunicación Directa</h3>
-                            <p>Te contactamos por WhatsApp para una comunicación rápida y personalizada.</p>
+                            <i class="fas fa-certificate"></i>
+                            <h3>Certificación ISO</h3>
+                            <p>Laboratorio certificado bajo normas ISO 9001:2015 que garantizan la calidad de nuestros procesos.</p>
                         </div>
                         <div class="feature-card">
                             <i class="fas fa-shield-alt"></i>
-                            <h3>Confiabilidad</h3>
-                            <p>Más de 5 años de experiencia respaldando a nuestros clientes.</p>
+                            <h3>Experiencia Confiable</h3>
+                            <p>Más de 5 años especializados en análisis técnico y certificación de productos tecnológicos.</p>
                         </div>
                     </div>
                 </div>
@@ -88,14 +110,24 @@
 
         <!-- PRODUCTOS PAGE -->
         <section id="productos" class="page-section">
-            <div class="productos-header">
+            <div class="hero-section">
                 <div class="container">
-                    <h1>Nuestros Productos</h1>
-                    <p>Descubre nuestra amplia gama de productos y servicios</p>
+                    <div class="hero-content">
+                        <h1>Nuestros Productos</h1>
+                        <p>Descubre nuestra amplia gama de productos analizados y certificados por nuestro laboratorio</p>
+                        <div class="hero-actions">
+                            <a href="#" class="cta-button" onclick="showPage('contacto')">
+                                <i class="fas fa-envelope"></i>
+                                Consultar Análisis
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="productos-grid" id="productosGrid">
+            <div class="container">
+                <h2 class="section-title">Productos Analizados</h2>
+                <div class="productos-grid" id="productosGrid">
                 <div class="producto-card">
                     <div class="producto-image">
                         <i class="fas fa-laptop"></i>
@@ -240,14 +272,23 @@
                     </div>
                 </div>
             </div>
+            </div>
         </section>
 
         <!-- NOSOTROS PAGE -->
         <section id="nosotros" class="page-section">
-            <div class="nosotros-hero">
+            <div class="hero-section">
                 <div class="container">
-                    <h1>Nosotros</h1>
-                    <p>Conoce nuestro laboratorio y metodología de trabajo</p>
+                    <div class="hero-content">
+                        <h1>Nosotros</h1>
+                        <p>Conoce nuestro laboratorio y metodología de trabajo profesional</p>
+                        <div class="hero-actions">
+                            <a href="#" class="cta-button" onclick="showPage('contacto')">
+                                <i class="fas fa-envelope"></i>
+                                Contactar Laboratorio
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -620,36 +661,99 @@
 
         <!-- CONTACTO PAGE -->
         <section id="contacto" class="page-section">
-            <div class="contact-page">
-                <div class="contact-card">
-                    <div class="contact-header">
-                        <div class="contact-header-content">
-                            <div class="whatsapp-icon">
-                                <i class="fab fa-whatsapp"></i>
+            <div class="contacto-hero">
+                <div class="container">
+                    <h1>Contacto</h1>
+                    <p>Comunícate con nuestro laboratorio para consultas técnicas</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Header de contacto con layout similar a "Sobre Nosotros" -->
+                <div class="contact-header-section">
+                    <div class="contact-header-content">
+                        <div class="contact-header-text">
+                            <h2>Consultas Técnicas</h2>
+                            <h3>Laboratorio de Análisis Especializado</h3>
+                            <p class="contact-intro">¿Necesitas información sobre nuestros análisis, metodologías o resultados de productos? Nuestro equipo técnico está disponible para resolver todas tus consultas profesionales.</p>
+                            
+                            <div class="contact-methods">
+                                <div class="method-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div class="method-info">
+                                        <strong>Email Técnico</strong>
+                                        <span>laboratorio@empresa.com</span>
+                                    </div>
+                                </div>
+                                <div class="method-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div class="method-info">
+                                        <strong>Línea Directa</strong>
+                                        <span>+54 11 2345-6789</span>
+                                    </div>
+                                </div>
+                                <div class="method-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="method-info">
+                                        <strong>Horario de Atención</strong>
+                                        <span>Lun a Vie: 9:00 - 18:00</span>
+                                    </div>
+                                </div>
                             </div>
-                            <h1>¿Cómo podemos ayudarte?</h1>
-                            <p>Envíanos tu consulta y te responderemos por WhatsApp</p>
+                        </div>
+                        
+                        <div class="contact-header-image">
+                            <div class="contact-hero-image">
+                                <div class="contact-image-main">
+                                    <i class="fas fa-headset"></i>
+                                    <h4>Soporte Especializado</h4>
+                                    <p>Equipo técnico profesional</p>
+                                </div>
+                                <div class="contact-features">
+                                    <div class="contact-feature">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <span>Expertos Certificados</span>
+                                    </div>
+                                    <div class="contact-feature">
+                                        <i class="fas fa-comments"></i>
+                                        <span>Consultas Técnicas</span>
+                                    </div>
+                                    <div class="contact-feature">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Respuesta Rápida</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-container">
+                <!-- Formulario minimalista -->
+                <div class="contact-form-section">
+                    <div class="form-container-minimal">
+                        <h3>Enviar Consulta Técnica</h3>
+                        <p>Completa el formulario y nuestro equipo te contactará</p>
+
                         <div class="success-message" id="successMessage">
-                            <i class="fas fa-check-circle"></i> ¡Mensaje enviado correctamente! Te contactaremos pronto por WhatsApp.
+                            <i class="fas fa-check-circle"></i> 
+                            <span>¡Consulta enviada correctamente! Te contactaremos pronto.</span>
                         </div>
 
                         <div class="error-message" id="errorMessage">
-                            <i class="fas fa-exclamation-triangle"></i> Por favor, completa todos los campos obligatorios.
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <span>Por favor, completa todos los campos obligatorios.</span>
                         </div>
 
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Nombre completo *</label>
-                                <input type="text" id="name" name="name" required placeholder="Ingresa tu nombre completo">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone">Teléfono/WhatsApp *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+54 9 11 1234-5678">
+                        <form id="contactForm" class="minimal-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Nombre completo *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Teléfono *</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="+54 11 1234-5678">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -659,65 +763,68 @@
 
                             <div class="form-group">
                                 <label>Tipo de consulta *</label>
-                                <div class="category-grid">
-                                    <div class="category-option" onclick="selectCategory('general')">
-                                        <input type="radio" id="general" name="category" value="general" required>
-                                        <i class="fas fa-comments"></i>
-                                        <label for="general">Consulta General</label>
-                                    </div>
-                                    <div class="category-option" onclick="selectCategory('soporte')">
-                                        <input type="radio" id="soporte" name="category" value="soporte" required>
-                                        <i class="fas fa-tools"></i>
-                                        <label for="soporte">Soporte Técnico</label>
-                                    </div>
-                                    <div class="category-option" onclick="selectCategory('ventas')">
-                                        <input type="radio" id="ventas" name="category" value="ventas" required>
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <label for="ventas">Ventas</label>
-                                    </div>
-                                    <div class="category-option" onclick="selectCategory('reclamo')">
-                                        <input type="radio" id="reclamo" name="category" value="reclamo" required>
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <label for="reclamo">Reclamo</label>
-                                    </div>
+                                <div class="category-grid-minimal">
+                                    <label class="category-option-minimal">
+                                        <input type="radio" name="category" value="analisis" required>
+                                        <span class="category-content">
+                                            <i class="fas fa-microscope"></i>
+                                            <span>Análisis de Productos</span>
+                                        </span>
+                                    </label>
+                                    <label class="category-option-minimal">
+                                        <input type="radio" name="category" value="certificacion" required>
+                                        <span class="category-content">
+                                            <i class="fas fa-certificate"></i>
+                                            <span>Certificaciones</span>
+                                        </span>
+                                    </label>
+                                    <label class="category-option-minimal">
+                                        <input type="radio" name="category" value="tecnico" required>
+                                        <span class="category-content">
+                                            <i class="fas fa-cogs"></i>
+                                            <span>Soporte Técnico</span>
+                                        </span>
+                                    </label>
+                                    <label class="category-option-minimal">
+                                        <input type="radio" name="category" value="general" required>
+                                        <span class="category-content">
+                                            <i class="fas fa-comments"></i>
+                                            <span>Consulta General</span>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="message">Mensaje *</label>
-                                <textarea id="message" name="message" required placeholder="Describe tu consulta detalladamente..."></textarea>
+                                <textarea id="message" name="message" required placeholder="Describe tu consulta técnica detalladamente..." rows="6"></textarea>
                             </div>
 
-                            <button type="submit" class="send-button">
-                                <i class="fab fa-whatsapp"></i>
-                                Enviar por WhatsApp
+                            <button type="submit" class="submit-button-minimal">
+                                <i class="fas fa-paper-plane"></i>
+                                Enviar Consulta
                             </button>
                         </form>
                     </div>
+                </div>
 
-                    <div class="info-section">
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <i class="fas fa-clock"></i>
-                                <div>
-                                    <strong>Horario de atención</strong><br>
-                                    Lun a Vie: 9:00 - 18:00
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-reply"></i>
-                                <div>
-                                    <strong>Tiempo de respuesta</strong><br>
-                                    Máximo 2 horas hábiles
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <div>
-                                    <strong>Datos seguros</strong><br>
-                                    Tu información está protegida
-                                </div>
-                            </div>
+                <!-- Información adicional minimalista -->
+                <div class="contact-info-section">
+                    <div class="info-grid-minimal">
+                        <div class="info-card-minimal">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Ubicación del Laboratorio</h4>
+                            <p>Av. Corrientes 1234, CABA<br>Buenos Aires, Argentina</p>
+                        </div>
+                        <div class="info-card-minimal">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Datos Protegidos</h4>
+                            <p>Tu información está segura<br>Política de privacidad aplicada</p>
+                        </div>
+                        <div class="info-card-minimal">
+                            <i class="fas fa-reply"></i>
+                            <h4>Tiempo de Respuesta</h4>
+                            <p>Máximo 2 horas hábiles<br>Respuesta garantizada</p>
                         </div>
                     </div>
                 </div>
