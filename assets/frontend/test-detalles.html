@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sistema de Detalles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .gallery-container {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .gallery-thumb {
+            width: 150px;
+            height: 100px;
+            background: #eee;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .gallery-thumb.active {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+        .product-image-placeholder {
+            width: 300px;
+            height: 200px;
+            background: #eee;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 10px 0;
+        }
+        .test-results {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🖼️ Test Sistema de Detalles - Proyecto Lab</h1>
+        
+        <div class="test-item">
+            <h3>Test 1: Imagen Principal de Detalle</h3>
+            <div class="product-image-placeholder active product-detail" data-product-id="laptop-pro-business">
+                <i class="fas fa-laptop"></i>
+                <p>Imagen Principal</p>
+            </div>
+            <p>Debería cargar: <code>assets/images/detalles/laptop-pro-business-1.jpg</code></p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 2: Galería de Detalles (3 imágenes)</h3>
+            <div class="gallery-container">
+                <div class="gallery-thumb active" data-product-id="laptop-pro-business" data-gallery-index="0">
+                    <i class="fas fa-image"></i>
+                    <small>Detalle 1</small>
+                </div>
+                <div class="gallery-thumb" data-product-id="laptop-pro-business" data-gallery-index="1">
+                    <i class="fas fa-image"></i>
+                    <small>Detalle 2</small>
+                </div>
+                <div class="gallery-thumb" data-product-id="laptop-pro-business" data-gallery-index="2">
+                    <i class="fas fa-image"></i>
+                    <small>Detalle 3</small>
+                </div>
+            </div>
+            <p>Deberían cargar 3 imágenes de detalle del laptop-pro-business</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 3: Producto sin imágenes de detalle</h3>
+            <div class="gallery-container">
+                <div class="gallery-thumb" data-product-id="producto-sin-detalles" data-gallery-index="0">
+                    <i class="fas fa-question"></i>
+                    <small>Sin detalle</small>
+                </div>
+            </div>
+            <p>Debería mostrar error: producto sin detalles configurados</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 4: Verificar Mapeo de Detalles</h3>
+            <button onclick="testDetailMapping()">Verificar Mapeo</button>
+            <div id="mapping-results"></div>
+        </div>
+
+        <div class="test-results">
+            <h3>📊 Resultados del Test</h3>
+            <div id="test-log"></div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="runAllTests()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                🚀 Ejecutar Tests de Detalles
+            </button>
+            <button onclick="simulateProductView()" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                👁️ Simular Vista de Producto
+            </button>
+            <button onclick="clearResults()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                🗑️ Limpiar
+            </button>
+        </div>
+    </div>
+
+    <script src="productos-images.js"></script>
+    <script src="detalles-images.js"></script>
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('test-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const classType = type === 'success' ? 'success' : type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'info' ? 'info' : '';
+            logDiv.innerHTML += `<div class="${classType}">[${timestamp}] ${message}</div>`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function testDetailMapping() {
+            const resultsDiv = document.getElementById('mapping-results');
+            
+            if (typeof detallesImageManager !== 'undefined') {
+                log('✅ DetallesImageManager está disponible', 'success');
+                
+                const detallesImages = detallesImageManager.detallesImages;
+                
+                log(`🖼️ Productos con detalles configurados: ${Object.keys(detallesImages).length}`, 'info');
+                
+                // Verificar producto específico
+                const testProduct = 'laptop-pro-business';
+                const productInfo = detallesImageManager.getProductDetailInfo(testProduct);
+                
+                if (productInfo.hasDetails) {
+                    log(`✅ Producto '${testProduct}' tiene ${productInfo.images.length} imágenes de detalle`, 'success');
+                    productInfo.images.forEach((img, index) => {
+                        log(`  📸 Detalle ${index + 1}: ${img}`, 'info');
+                    });
+                } else {
+                    log(`❌ Producto '${testProduct}' NO tiene detalles configurados`, 'error');
+                }
+                
+                resultsDiv.innerHTML = `
+                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 10px;">
+Productos con detalles: ${JSON.stringify(Object.keys(detallesImages), null, 2)}
+
+Detalles de '${testProduct}':
+${JSON.stringify(productInfo, null, 2)}
+                    </pre>
+                `;
+            } else {
+                log('❌ DetallesImageManager NO está disponible', 'error');
+                resultsDiv.innerHTML = '<p class="error">Error: DetallesImageManager no se cargó correctamente</p>';
+            }
+        }
+
+        function simulateProductView() {
+            log('🎬 Simulando vista de producto...', 'info');
+            
+            // Simular que se activó una sección de producto
+            const mockSection = document.createElement('section');
+            mockSection.id = 'laptop-pro-business';
+            mockSection.className = 'product-detail active';
+            
+            // Agregar elementos de galería
+            const galleryElements = document.querySelectorAll('[data-gallery-index]');
+            galleryElements.forEach(el => mockSection.appendChild(el.cloneNode(true)));
+            
+            // Agregar imagen principal
+            const mainImage = document.querySelector('.product-image-placeholder');
+            if (mainImage) {
+                mockSection.appendChild(mainImage.cloneNode(true));
+            }
+            
+            document.body.appendChild(mockSection);
+            
+            if (typeof detallesImageManager !== 'undefined') {
+                detallesImageManager.loadDetailImages(mockSection);
+                log('🖼️ Carga de imágenes de detalle iniciada', 'success');
+            } else {
+                log('❌ No se puede simular - Manager no disponible', 'error');
+            }
+            
+            // Limpiar después de 5 segundos
+            setTimeout(() => {
+                document.body.removeChild(mockSection);
+                log('🧹 Simulación completada y limpiada', 'info');
+            }, 5000);
+        }
+
+        function runAllTests() {
+            log('🚀 Iniciando tests del sistema de detalles...', 'info');
+            
+            // Test 1: Verificar disponibilidad del manager
+            testDetailMapping();
+            
+            // Test 2: Simular carga de imágenes de galería
+            const galleryElements = document.querySelectorAll('[data-gallery-index]');
+            log(`🔍 Encontrados ${galleryElements.length} elementos de galería`, 'info');
+            
+            galleryElements.forEach((element, index) => {
+                const productId = element.getAttribute('data-product-id');
+                const galleryIndex = element.getAttribute('data-gallery-index');
+                log(`📸 Procesando galería ${index + 1}: ${productId} índice ${galleryIndex}`, 'info');
+                
+                if (typeof detallesImageManager !== 'undefined') {
+                    detallesImageManager.loadSingleDetailImage(element);
+                } else {
+                    log('❌ No se puede cargar imagen - Manager no disponible', 'error');
+                }
+            });
+            
+            // Test 3: Simular carga de imagen principal
+            const mainImages = document.querySelectorAll('.product-image-placeholder[data-product-id]');
+            mainImages.forEach(element => {
+                if (typeof detallesImageManager !== 'undefined') {
+                    detallesImageManager.loadMainDetailImage(element);
+                }
+            });
+            
+            // Test 4: Verificar estado después de 3 segundos
+            setTimeout(() => {
+                const loadedImages = document.querySelectorAll('img.loaded');
+                const errorStates = document.querySelectorAll('.image-error');
+                
+                log(`📊 Resumen después de 3s: ${loadedImages.length} imágenes cargadas, ${errorStates.length} errores`, 'info');
+                
+                if (loadedImages.length > 0) {
+                    log('🎉 ¡Al menos una imagen de detalle se cargó correctamente!', 'success');
+                } else {
+                    log('⚠️ Ninguna imagen de detalle se cargó. Verificar rutas y archivos.', 'warning');
+                }
+            }, 3000);
+        }
+
+        function clearResults() {
+            document.getElementById('test-log').innerHTML = '';
+            document.getElementById('mapping-results').innerHTML = '';
+            
+            // Limpiar estados de imágenes
+            document.querySelectorAll('.image-loading, .image-error').forEach(el => el.remove());
+            document.querySelectorAll('img').forEach(img => img.remove());
+            
+            // Restaurar iconos originales
+            document.querySelectorAll('[data-gallery-index]').forEach(el => {
+                if (!el.querySelector('i')) {
+                    el.innerHTML = '<i class="fas fa-image"></i><small>Detalle</small>';
+                }
+            });
+            
+            document.querySelectorAll('.product-image-placeholder').forEach(el => {
+                if (!el.querySelector('i')) {
+                    el.innerHTML = '<i class="fas fa-laptop"></i><p>Imagen Principal</p>';
+                }
+            });
+            
+            log('🧹 Resultados limpiados', 'info');
+        }
+
+        // Auto-inicializar cuando la página se carga
+        window.addEventListener('load', () => {
+            log('🌟 Página de test de detalles cargada', 'success');
+            log('💡 Haz clic en "Ejecutar Tests de Detalles" para verificar el sistema', 'info');
+            
+            // Verificar que ambos managers estén disponibles
+            setTimeout(() => {
+                if (typeof productosImageManager !== 'undefined') {
+                    log('✅ ProductosImageManager disponible', 'success');
+                } else {
+                    log('❌ ProductosImageManager NO disponible', 'error');
+                }
+                
+                if (typeof detallesImageManager !== 'undefined') {
+                    log('✅ DetallesImageManager disponible', 'success');
+                } else {
+                    log('❌ DetallesImageManager NO disponible', 'error');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

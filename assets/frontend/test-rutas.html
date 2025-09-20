@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Directo de Rutas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-box { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+        img { max-width: 200px; height: auto; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test Directo de Rutas de Imágenes</h1>
+    
+    <div class="test-box">
+        <h3>Test 1: Ruta Relativa Simple</h3>
+        <p>Ruta: <code>../images/products/vinagre 01.jpg</code></p>
+        <img src="../images/products/vinagre 01.jpg" alt="Test 1" 
+             onload="this.nextElementSibling.textContent='✅ CARGA CORRECTA'; this.nextElementSibling.className='success';" 
+             onerror="this.nextElementSibling.textContent='❌ ERROR AL CARGAR'; this.nextElementSibling.className='error';">
+        <div>Esperando...</div>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 2: Ruta con Codificación URL</h3>
+        <p>Ruta: <code>../images/products/vinagre%2001.jpg</code></p>
+        <img src="../images/products/vinagre%2001.jpg" alt="Test 2" 
+             onload="this.nextElementSibling.textContent='✅ CARGA CORRECTA'; this.nextElementSibling.className='success';" 
+             onerror="this.nextElementSibling.textContent='❌ ERROR AL CARGAR'; this.nextElementSibling.className='error';">
+        <div>Esperando...</div>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 3: Ruta Absoluta</h3>
+        <p>Ruta: <code>/Poryecto%20Ing.%20Guzman/assets/images/products/vinagre%2001.jpg</code></p>
+        <img src="/Poryecto%20Ing.%20Guzman/assets/images/products/vinagre%2001.jpg" alt="Test 3" 
+             onload="this.nextElementSibling.textContent='✅ CARGA CORRECTA'; this.nextElementSibling.className='success';" 
+             onerror="this.nextElementSibling.textContent='❌ ERROR AL CARGAR'; this.nextElementSibling.className='error';">
+        <div>Esperando...</div>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 4: JavaScript ProductosImageManager</h3>
+        <div id="js-test">
+            <div class="producto-image" data-lazy-load data-product-id="laptop-pro-business">
+                <i>🖼️ Esperando carga JS...</i>
+            </div>
+        </div>
+        <button onclick="testJS()">Probar Sistema JS</button>
+        <div id="js-result">Haz clic para probar</div>
+    </div>
+
+    <script src="productos-images.js"></script>
+    <script>
+        function testJS() {
+            const element = document.querySelector('[data-product-id="laptop-pro-business"]');
+            const resultDiv = document.getElementById('js-result');
+            
+            if (typeof productosImageManager !== 'undefined') {
+                resultDiv.innerHTML = '✅ ProductosImageManager cargado. Iniciando carga de imagen...';
+                resultDiv.className = 'success';
+                
+                // Simular carga
+                productosImageManager.loadSingleImage(element);
+                
+                setTimeout(() => {
+                    const img = element.querySelector('img');
+                    if (img && img.complete) {
+                        resultDiv.innerHTML = '🎉 ¡Imagen cargada exitosamente por JS!';
+                    } else {
+                        resultDiv.innerHTML = '⚠️ JS ejecutado pero imagen no visible';
+                        resultDiv.className = 'error';
+                    }
+                }, 2000);
+                
+            } else {
+                resultDiv.innerHTML = '❌ ProductosImageManager NO está disponible';
+                resultDiv.className = 'error';
+            }
+        }
+
+        // Auto-test al cargar la página
+        window.addEventListener('load', () => {
+            console.log('🔍 Página de test cargada');
+            
+            setTimeout(() => {
+                if (typeof productosImageManager !== 'undefined') {
+                    console.log('✅ ProductosImageManager disponible');
+                    console.log('📦 Productos mapeados:', Object.keys(productosImageManager.productImages));
+                } else {
+                    console.log('❌ ProductosImageManager NO disponible');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

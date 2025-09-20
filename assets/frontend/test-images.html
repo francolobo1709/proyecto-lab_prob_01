@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sistema de Imágenes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .producto-image {
+            width: 200px;
+            height: 150px;
+            background: #eee;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 10px 0;
+        }
+        .test-results {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Sistema de Imágenes - Proyecto Lab</h1>
+        
+        <div class="test-item">
+            <h3>Test 1: Producto laptop-pro-business</h3>
+            <div class="producto-image" data-lazy-load data-product-id="laptop-pro-business">
+                <i class="fas fa-image"></i>
+            </div>
+            <p>Debería cargar: <code>assets/images/products/vinagre 01.jpg</code></p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 2: Producto inexistente</h3>
+            <div class="producto-image" data-lazy-load data-product-id="producto-inexistente">
+                <i class="fas fa-image"></i>
+            </div>
+            <p>Debería mostrar error: producto no encontrado</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 3: Verificar mapeo de productos</h3>
+            <button onclick="testProductMapping()">Verificar Mapeo</button>
+            <div id="mapping-results"></div>
+        </div>
+
+        <div class="test-results">
+            <h3>📊 Resultados del Test</h3>
+            <div id="test-log"></div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button onclick="runAllTests()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                🚀 Ejecutar Todos los Tests
+            </button>
+            <button onclick="clearResults()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                🗑️ Limpiar Resultados
+            </button>
+        </div>
+    </div>
+
+    <script src="productos-images.js"></script>
+    <script>
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('test-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const classType = type === 'success' ? 'success' : type === 'error' ? 'error' : type === 'warning' ? 'warning' : '';
+            logDiv.innerHTML += `<div class="${classType}">[${timestamp}] ${message}</div>`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function testProductMapping() {
+            const resultsDiv = document.getElementById('mapping-results');
+            
+            if (typeof productosImageManager !== 'undefined') {
+                log('✅ ProductosImageManager está disponible', 'success');
+                
+                const productImages = productosImageManager.productImages;
+                const labImages = productosImageManager.laboratoryImages;
+                
+                log(`📦 Productos mapeados: ${Object.keys(productImages).length}`, 'info');
+                log(`🔬 Imágenes de laboratorio: ${Object.keys(labImages).length}`, 'info');
+                
+                // Verificar producto específico
+                const testProduct = 'laptop-pro-business';
+                if (productImages[testProduct]) {
+                    log(`✅ Producto '${testProduct}' encontrado: ${productImages[testProduct]}`, 'success');
+                } else {
+                    log(`❌ Producto '${testProduct}' NO encontrado`, 'error');
+                }
+                
+                resultsDiv.innerHTML = `
+                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 10px;">
+Productos: ${JSON.stringify(Object.keys(productImages), null, 2)}
+
+Laboratorio: ${JSON.stringify(Object.keys(labImages), null, 2)}
+                    </pre>
+                `;
+            } else {
+                log('❌ ProductosImageManager NO está disponible', 'error');
+                resultsDiv.innerHTML = '<p class="error">Error: ProductosImageManager no se cargó correctamente</p>';
+            }
+        }
+
+        function runAllTests() {
+            log('🚀 Iniciando tests del sistema de imágenes...', 'info');
+            
+            // Test 1: Verificar disponibilidad del manager
+            testProductMapping();
+            
+            // Test 2: Simular carga de imágenes
+            const productElements = document.querySelectorAll('[data-product-id]');
+            log(`🔍 Encontrados ${productElements.length} elementos con data-product-id`, 'info');
+            
+            productElements.forEach((element, index) => {
+                const productId = element.getAttribute('data-product-id');
+                log(`📸 Procesando elemento ${index + 1}: ${productId}`, 'info');
+                
+                if (typeof productosImageManager !== 'undefined') {
+                    // Simular la carga de imagen
+                    productosImageManager.loadSingleImage(element);
+                } else {
+                    log('❌ No se puede cargar imagen - Manager no disponible', 'error');
+                }
+            });
+            
+            // Test 3: Verificar estado después de 3 segundos
+            setTimeout(() => {
+                const loadedImages = document.querySelectorAll('img.loaded');
+                const errorStates = document.querySelectorAll('.image-error');
+                
+                log(`📊 Resumen después de 3s: ${loadedImages.length} imágenes cargadas, ${errorStates.length} errores`, 'info');
+                
+                if (loadedImages.length > 0) {
+                    log('🎉 ¡Al menos una imagen se cargó correctamente!', 'success');
+                } else {
+                    log('⚠️ Ninguna imagen se cargó. Verificar rutas y configuración.', 'warning');
+                }
+            }, 3000);
+        }
+
+        function clearResults() {
+            document.getElementById('test-log').innerHTML = '';
+            document.getElementById('mapping-results').innerHTML = '';
+            
+            // Limpiar estados de imágenes
+            document.querySelectorAll('.image-loading, .image-error').forEach(el => el.remove());
+            document.querySelectorAll('img').forEach(img => img.remove());
+            
+            // Restaurar iconos originales
+            document.querySelectorAll('[data-product-id]').forEach(el => {
+                if (!el.querySelector('i')) {
+                    el.innerHTML = '<i class="fas fa-image"></i>';
+                }
+            });
+            
+            log('🧹 Resultados limpiados', 'info');
+        }
+
+        // Auto-inicializar cuando la página se carga
+        window.addEventListener('load', () => {
+            log('🌟 Página cargada - Sistema de test listo', 'success');
+            log('💡 Haz clic en "Ejecutar Todos los Tests" para verificar el sistema', 'info');
+        });
+    </script>
+</body>
+</html>

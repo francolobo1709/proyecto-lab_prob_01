@@ -7,23 +7,23 @@
 class ProductosImageManager {
     constructor() {
         this.productImages = {
-            'laptop-pro-business': 'assets/images/products/vinagre 01.jpg',
-            'microscopio-avanzado': 'assets/images/products/microscopio-avanzado.jpg',
-            'centrifuga-alta-velocidad': 'assets/images/products/centrifuga-alta-velocidad.jpg',
-            'espectrofotometro-uv': 'assets/images/products/espectrofotometro-uv.jpg',
-            'balanza-analitica': 'assets/images/products/balanza-analitica.jpg',
-            'autoclave-esterilizacion': 'assets/images/products/autoclave-esterilizacion.jpg',
-            'campana-extractora': 'assets/images/products/campana-extractora.jpg',
-            'ph-metro-digital': 'assets/images/products/ph-metro-digital.jpg',
-            'incubadora-co2': 'assets/images/products/incubadora-co2.jpg'
+            'laptop-pro-business': '../images/products/vinagre 01.jpg',
+            'microscopio-avanzado': '/Poryecto%20Ing.%20Guzman/assets/images/products/microscopio-avanzado.jpg',
+            'centrifuga-alta-velocidad': '/Poryecto%20Ing.%20Guzman/assets/images/products/centrifuga-alta-velocidad.jpg',
+            'espectrofotometro-uv': '/Poryecto%20Ing.%20Guzman/assets/images/products/espectrofotometro-uv.jpg',
+            'balanza-analitica': '/Poryecto%20Ing.%20Guzman/assets/images/products/balanza-analitica.jpg',
+            'autoclave-esterilizacion': '/Poryecto%20Ing.%20Guzman/assets/images/products/autoclave-esterilizacion.jpg',
+            'campana-extractora': '/Poryecto%20Ing.%20Guzman/assets/images/products/campana-extractora.jpg',
+            'ph-metro-digital': '/Poryecto%20Ing.%20Guzman/assets/images/products/ph-metro-digital.jpg',
+            'incubadora-co2': '/Poryecto%20Ing.%20Guzman/assets/images/products/incubadora-co2.jpg'
         };
         
         // NUEVO: Imágenes de laboratorio
         this.laboratoryImages = {
-            'telescopio-digital': 'assets/images/laboratory/etc01.jpg',
-            'microscopio-principal': 'assets/images/laboratory/microscopio-principal.jpg',
-            'laboratorio-general': 'assets/images/laboratory/laboratorio-general.jpg',
-            'equipo-principal': 'assets/images/laboratory/equipo-principal.jpg'
+            'telescopio-digital': '/Poryecto%20Ing.%20Guzman/assets/images/laboratory/etc01.jpg',
+            'microscopio-principal': '/Poryecto%20Ing.%20Guzman/assets/images/laboratory/microscopio-principal.jpg',
+            'laboratorio-general': '/Poryecto%20Ing.%20Guzman/assets/images/laboratory/laboratorio-general.jpg',
+            'equipo-principal': '/Poryecto%20Ing.%20Guzman/assets/images/laboratory/equipo-principal.jpg'
         };
         
         this.currentSection = null;
@@ -107,7 +107,7 @@ class ProductosImageManager {
     loadProductImages(section) {
         if (!section) return;
         
-        const images = section.querySelectorAll('img[data-product-image]');
+        const images = section.querySelectorAll('[data-product-id]');
         console.log(`ProductosImageManager: Cargando ${images.length} imágenes de productos`);
         
         images.forEach(img => this.loadSingleImage(img));
@@ -123,13 +123,13 @@ class ProductosImageManager {
         labImages.forEach(img => this.loadSingleLabImage(img));
     }
     
-    loadSingleImage(img) {
-        const productId = img.getAttribute('data-product-image');
+    loadSingleImage(element) {
+        const productId = element.getAttribute('data-product-id');
         const imagePath = this.productImages[productId];
         
         if (!imagePath) {
             console.warn(`ProductosImageManager: No se encontró imagen para producto: ${productId}`);
-            this.showImageError(img, 'Imagen no disponible');
+            this.showImageError(element, 'Imagen no disponible');
             return;
         }
         
@@ -139,21 +139,32 @@ class ProductosImageManager {
         
         if (attempts >= this.maxRetries) {
             console.warn(`ProductosImageManager: Máximo de reintentos alcanzado para ${productId}`);
-            this.showImageError(img, 'Error al cargar imagen');
+            this.showImageError(element, 'Error al cargar imagen');
             return;
         }
         
         // Mostrar indicador de carga
-        this.showLoadingState(img);
+        this.showLoadingState(element);
         
         // Crear nueva imagen para precargar
         const tempImage = new Image();
         
         tempImage.onload = () => {
             console.log(`ProductosImageManager: Imagen cargada exitosamente: ${productId}`);
-            img.src = imagePath;
-            img.classList.add('loaded');
-            this.hideLoadingState(img);
+            // Crear elemento img si no existe
+            let imgElement = element.querySelector('img');
+            if (!imgElement) {
+                imgElement = document.createElement('img');
+                element.innerHTML = ''; // Limpiar contenido existente (iconos)
+                element.appendChild(imgElement);
+            }
+            imgElement.src = imagePath;
+            imgElement.alt = `Imagen de ${productId}`;
+            imgElement.classList.add('loaded');
+            imgElement.style.width = '100%';
+            imgElement.style.height = '100%';
+            imgElement.style.objectFit = 'cover';
+            this.hideLoadingState(element);
             this.loadAttempts.delete(attemptKey);
         };
         
@@ -163,9 +174,9 @@ class ProductosImageManager {
             
             if (attempts < this.maxRetries - 1) {
                 // Reintentar después de un delay
-                setTimeout(() => this.loadSingleImage(img), 1000 * (attempts + 1));
+                setTimeout(() => this.loadSingleImage(element), 1000 * (attempts + 1));
             } else {
-                this.showImageError(img, 'No se pudo cargar la imagen');
+                this.showImageError(element, 'No se pudo cargar la imagen');
             }
         };
         
@@ -228,35 +239,37 @@ class ProductosImageManager {
         }, 100);
     }
     
-    showLoadingState(img) {
-        const container = img.closest('.product-image-container') || img.parentElement;
-        if (!container) return;
-        
+    showLoadingState(element) {
         // Remover estados anteriores
-        this.clearImageStates(container);
+        this.clearImageStates(element);
         
         // Crear indicador de carga
         const loadingDiv = document.createElement('div');
         loadingDiv.className = 'image-loading';
-        loadingDiv.textContent = 'Cargando imagen...';
-        container.appendChild(loadingDiv);
-        
-        img.style.opacity = '0';
+        loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i><br>Cargando imagen...';
+        loadingDiv.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            z-index: 2;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        `;
+        element.appendChild(loadingDiv);
     }
     
-    hideLoadingState(img) {
-        const container = img.closest('.product-image-container') || img.parentElement;
-        if (!container) return;
-        
-        this.clearImageStates(container);
-        img.style.opacity = '1';
+    hideLoadingState(element) {
+        this.clearImageStates(element);
     }
     
-    showImageError(img, message) {
-        const container = img.closest('.product-image-container') || img.parentElement;
-        if (!container) return;
-        
-        this.clearImageStates(container);
+    showImageError(element, message) {
+        this.clearImageStates(element);
         
         const errorDiv = document.createElement('div');
         errorDiv.className = 'image-error';
@@ -264,13 +277,25 @@ class ProductosImageManager {
             <i class="fas fa-exclamation-triangle"></i><br>
             ${message}
         `;
-        container.appendChild(errorDiv);
-        
-        img.style.opacity = '0';
+        errorDiv.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #999;
+            font-size: 0.8rem;
+            z-index: 2;
+            background: rgba(245,245,245,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        `;
+        element.appendChild(errorDiv);
     }
     
-    clearImageStates(container) {
-        const existingStates = container.querySelectorAll('.image-loading, .image-error');
+    clearImageStates(element) {
+        const existingStates = element.querySelectorAll('.image-loading, .image-error');
         existingStates.forEach(el => el.remove());
     }
     
